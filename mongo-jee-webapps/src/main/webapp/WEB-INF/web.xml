@@ -8,20 +8,20 @@
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
         <servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet
-		</servlet-class>
+	</servlet-class>
         <init-param>
             <param-name>jaxrs.serviceClasses</param-name>
             <param-value>
-				com.mongodb.jee.webapps.jaxrs.JaxrsProductsService
-			</param-value>
+                com.mongodb.jee.webapps.jaxrs.JaxrsProductsService
+            </param-value>
         </init-param>
         <init-param>
             <param-name>jaxrs.providers</param-name>
             <param-value>
-				com.mongodb.jee.jaxrs.providers.DBObjectIterableProvider,
-				com.mongodb.jee.jaxrs.providers.BSONObjectProvider,
-				com.mongodb.jee.jaxrs.providers.PageResultProvider
-			</param-value>
+		com.mongodb.jee.jaxrs.providers.DBObjectIterableProvider,
+		com.mongodb.jee.jaxrs.providers.BSONObjectProvider,
+		com.mongodb.jee.jaxrs.providers.PageResultProvider
+            </param-value>
         </init-param>
     </servlet>
     <servlet>
