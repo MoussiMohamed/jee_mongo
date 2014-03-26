@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1395669291578
+Build-Jdk: 1.7.0_51
+Built-By: msi
+Bundle-Description: Web support + JAX-RS support for MongoDB.
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: mongo-jee
+Bundle-SymbolicName: fr.opensagres.mongodb.mongo-jee
+Bundle-Version: 1.0.1.20140324-1454
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.mongodb.jee;uses:="com.mongodb";version="1.0.1.SNAPS
+ HOT",com.mongodb.jee.jaxrs;uses:="com.mongodb.jee.jaxrs.providers,javax
+ .ws.rs.core,com.mongodb.jee.util,javax.ws.rs";version="1.0.1.SNAPSHOT",
+ com.mongodb.jee.jaxrs.providers;uses:="javax.ws.rs.ext,javax.ws.rs.core
+ ,com.mongodb.jee.util,org.bson,javax.ws.rs,com.mongodb.jee.util.org.apa
+ che.commons.io,com.mongodb,com.mongodb.jee,dojo.store";version="1.0.1.S
+ NAPSHOT",com.mongodb.jee.servlet;uses:="javax.servlet,com.mongodb.jee,c
+ om.mongodb,com.mongodb.jee.util,javax.servlet.http";version="1.0.1.SNAP
+ SHOT",com.mongodb.jee.util;uses:="org.bson.types,com.mongodb,com.mongod
+ b.jee.util.org.apache.commons.io,org.bson.util,org.bson,com.mongodb.uti
+ l";version="1.0.1.SNAPSHOT",com.mongodb.jee.util.org.apache.commons.io;
+ uses:="com.mongodb.jee.util.org.apache.commons.io.output";version="1.0.
+ 1.SNAPSHOT",com.mongodb.jee.util.org.apache.commons.io.input;version="1
+ .0.1.SNAPSHOT",com.mongodb.jee.util.org.apache.commons.io.output;uses:=
+ "com.mongodb.jee.util.org.apache.commons.io.input";version="1.0.1.SNAPS
+ HOT",dojo.jaxb;uses:="javax.xml.bind.annotation.adapters,dojo.store";ve
+ rsion="1.0.1.SNAPSHOT",dojo.store;uses:="dojo.jaxb,javax.xml.bind.annot
+ ation.adapters";version="1.0.1.SNAPSHOT"
+Import-Package: com.mongodb;version="[2.10,3)",com.mongodb.util;version=
+ "[2.10,3)",javax.servlet,javax.servlet.http,javax.ws.rs;version="[1.1,2
+ )",javax.ws.rs.core;version="[1.1,2)",javax.ws.rs.ext;version="[1.1,2)"
+ ,javax.xml.bind.annotation.adapters,org.bson;version="[2.10,3)",org.bso
+ n.types;version="[2.10,3)",org.bson.util;version="[2.10,3)"
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.50.0
