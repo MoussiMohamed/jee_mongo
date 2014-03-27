@@ -23,8 +23,9 @@ require(["dojo/dom", "dojo/domReady!", "dojox/grid/EnhancedGrid", "dojox/grid/en
     
     /*set up layout*/
     var layout = [[
-      {name: 'Title', field: 'title', width: "200px"},
-      {name: 'Description', field: 'description', width: "250px"}
+      {name: 'Quantite', field: 'Quantite', width: "200px"},
+      {name: 'Reference', field: 'Reference', width: "250px"}
+
     ]];
 
     /*create a new grid:*/
@@ -35,7 +36,7 @@ require(["dojo/dom", "dojo/domReady!", "dojox/grid/EnhancedGrid", "dojox/grid/en
         rowSelector: '20px',
         plugins: {
           pagination: {
-              pageSizes: ["25", "50", "100", "All"],
+              pageSizes: ["50", "75", "125", "All"],
               description: true,
               sizeSwitch: true,
               pageStepper: true,

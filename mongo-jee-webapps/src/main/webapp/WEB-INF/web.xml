@@ -57,7 +57,7 @@
         <param-value>mongodb://moussi:msimed@localhost:27017/mydb</param-value>
     </context-param>
     <welcome-file-list>
-        <welcome-file>form.xhtml</welcome-file>
+        <welcome-file>ListProducts.xhtml</welcome-file>
 <!--        <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>default.html</welcome-file>

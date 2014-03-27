@@ -4,12 +4,59 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
                 	
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
 
-<h2>ADD CATEGORY</h2>
-<form>
-First name: <input type="text" name="firstname"><br>
-Last name: <input type="text" name="lastname">
-</form>
+<h:head>
+	
+</h:head>
+
+<h:body>
+ <h:form>
+
+    <p:dataTable id="dataTable" var="car" value="#{tableBean.carsSmall}" widgetVar="carsTable" 
+            emptyMessage="No cars found with given criteria" filteredValue="#{tableBean.filteredCars}">
+
+         <f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Search all fields:" />
+                <p:inputText id="globalFilter" onkeyup="carsTable.filter()" style="width:150px" />
+            </p:outputPanel>
+        </f:facet>
+
+        <p:column id="modelColumn" filterBy="model" 
+                headerText="Model" footerText="contains"
+                filterMatchMode="contains">
+            <h:outputText value="#{car.model}" />
+        </p:column>
+
+        <p:column id="yearColumn" filterBy="year"
+                headerText="Year" footerText="startsWith">
+            <h:outputText value="#{car.year}" />
+        </p:column>
+
+        <p:column id="manufacturerColumn" filterBy="manufacturer" 
+                headerText="Manufacturer" footerText="exact"
+                filterOptions="#{tableBean.manufacturerOptions}"
+                filterMatchMode="exact">
+            <h:outputText value="#{car.manufacturer}" />
+        </p:column>
+
+        <p:column id="colorColumn" filterBy="color"
+                headerText="Color" footerText="endsWith" filterMatchMode="endsWith">
+            <h:outputText value="#{car.color}" />
+        </p:column>
+    </p:dataTable>
+    
+</h:form>
+                    
+</h:body>
+</html>
                     
 
 </ui:composition>

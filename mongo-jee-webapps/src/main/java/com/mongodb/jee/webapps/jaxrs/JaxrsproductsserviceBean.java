@@ -12,7 +12,11 @@ import com.mongodb.jee.PageResult;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.ReadPreference;
+import com.mongodb.WriteConcern;
+import com.mongodb.jee.webapps.controller.ProductsBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
@@ -30,10 +34,22 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
+import com.mongodb.jee.webapps.controller.TableBean;
+import java.io.Serializable;
+import java.util.ArrayList;
 
+@ManagedBean
+@SessionScoped
 @Path("/")
-public class JaxrsProductsService {
-    
+public class JaxrsproductsserviceBean implements Serializable{
+    DBObject jRow;
+        JSONArray rows;
+        DBCollection coll;
+        private String f;
+        DB db;
+        private List<ProductsBean> products;
+        
+//    private File file;
 	@GET
 	@Path("/init")
 	public void initializeData() {
@@ -47,27 +63,35 @@ public class JaxrsProductsService {
 			products.insert(product);
 		}
 	}
+        public JaxrsproductsserviceBean(){
+            super();
+            products = new ArrayList<ProductsBean>();
+            populateRandomCars(products,  getSizeCursor());
+        }
+        public List<ProductsBean> getProducts() {
+            
+		return products;
+	}
+        
+        private void populateRandomCars(List<ProductsBean> list, int size) {
+		for(int i = 0 ; i < size ; i++)
+			list.add(new ProductsBean(getReference(), getDesignation(), getQuantite(), getDepot()));
+	}
         
 	@GET
 	@Path("/products")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String findProducts(@HeaderParam("Range") PageRangeRequest range) throws UnknownHostException {
- 
-        return read();
-	}
-        
-        JSONArray rows;
-        private String read(){
-            try
+	public PageResult findProducts(@HeaderParam("Range") PageRangeRequest range) throws UnknownHostException {
+ try
         {
             FileInputStream file = new FileInputStream(new File("/home/msi/Bureau/inv-04-02-2014.xls"));
             //Create Workbook instance holding reference to .xlsx file
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             //Get first/desired sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
-            DB db = MongoHolder.connect().getDB("mydb");
-            DBCollection coll = db.getCollection("Collection1");
+            db = MongoHolder.connect().getDB("mydb");
+            coll = db.getCollection("Collection1");
             // Iterate through the rows.
             rows = new JSONArray();
             //Iterate through each rows one by one
@@ -75,13 +99,12 @@ public class JaxrsProductsService {
             while (rowIterator.hasNext()) 
             {
                 Row row = rowIterator.next();
-                JSONObject jRow = new JSONObject();
+                jRow = new BasicDBObject();
                 //For each row, iterate through all the columns
                 Iterator<Cell> cellIterator = row.cellIterator();
                 while (cellIterator.hasNext())
                 {
                     Cell cell = cellIterator.next();
-                    
                     //Check the cell type and format accordingly
                     switch (cell.getCellType()) 
                     {
@@ -99,36 +122,53 @@ public class JaxrsProductsService {
                             break;
                     }
                     rows.put(jRow);
-                }   
+                    
+                }
+                coll.insert(jRow);
             }
             System.out.println(rows);
-            coll.insert((List<DBObject>) rows);
+
             file.close();
         } 
         catch (Exception e) 
         {
             e.printStackTrace();
         }
-            return rows.toString();
+return new PageResult(coll.find(), range.getFromIndex(),
+				range.getToIndex());
+//            return getFile();
+	}
+        public String getReference(){
+            DBCursor cursorRef= coll.find();
+            cursorRef.next().get("Reference");
+            return cursorRef.toString();
         }
-        @ManagedBean
-        @SessionScoped
-        public class fileUploadController {
-    private UploadedFile file;
-
-    public UploadedFile getFile() {
-        return file;
-    }
-
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
-
-    public void upload() {
-        if(file != null) {
-            FacesMessage msg = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+        public String getDesignation(){
+            DBCursor cursorDes= coll.find();
+            cursorDes.next().get("Designation");
+            return cursorDes.toString();
         }
-    }
+        public int getQuantite(){
+            DBCursor cursorQ= coll.find();
+            cursorQ.next().get("Quantite");
+            int i;
+            i = Integer.parseInt(cursorQ.toString());
+            return i;
+        }
+        public String getDepot(){
+            DBCursor cursorDep= coll.find();
+            cursorDep.next().get("Depot");
+            return cursorDep.toString();
+        }
+        public int getSizeCursor(){
+            
+            return coll.find().count();
+        }
 }
-}
+        
+//    public String getFile() {
+//           
+//        return "";
+//    
+//    }
+

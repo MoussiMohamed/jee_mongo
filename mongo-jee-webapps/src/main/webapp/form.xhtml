@@ -17,10 +17,10 @@
 
     <p:messages showDetail="true"/>
 
-    <p:fileUpload value="#{fileUploadController.file}" mode="simple"/>
+    <p:fileUpload value="" mode="simple" allowTypes="/(\.|\/)(xls)$/"/>
 
     <p:commandButton value="Submit" ajax="false"
-                actionListener="#{fileUploadController.upload}"/>
+                     actionListener=""/>
 
 </h:form>
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+
+<h:body>
+    
+<h:form prependId="false">
+
+    <p:dataTable id="dataTable" var="car" value=""
+                 paginator="true" rows="10"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15">
+        <f:facet name="header">
+            Ajax Pagination
+        </f:facet>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="REFERENCE" />
+            </f:facet>
+            <h:outputText value="#{productsBean.reference}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="DESIGNAION" />
+            </f:facet>
+            <h:outputText value="#{productsBean.designation}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="QUANTITE" />
+            </f:facet>
+            <h:outputText value="#{productsBean.quantite}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="DEPOT" />
+            </f:facet>
+            <h:outputText value="#{productsBean.depot}" />
+        </p:column>
+    </p:dataTable>
+
+</h:form>
+                    
+
+</h:body>
+</html>
