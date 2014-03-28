@@ -32,7 +32,7 @@
         <p:column id="modelColumn" filterBy="model" 
                 headerText="Model" footerText="contains"
                 filterMatchMode="contains">
-            <h:outputText value="#{car.model}" />
+            <h:outputText value="#{car.REFERENCE}" />
         </p:column>
 
         <p:column id="yearColumn" filterBy="year"
@@ -44,7 +44,7 @@
                 headerText="Manufacturer" footerText="exact"
                 filterOptions="#{tableBean.manufacturerOptions}"
                 filterMatchMode="exact">
-            <h:outputText value="#{car.manufacturer}" />
+            <h:outputText value="#{car.DESIGNATION}" />
         </p:column>
 
         <p:column id="colorColumn" filterBy="color"

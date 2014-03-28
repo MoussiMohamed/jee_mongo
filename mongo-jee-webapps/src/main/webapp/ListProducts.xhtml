@@ -11,48 +11,42 @@
 </h:head>
 
 <h:body>
-    
-<h:form prependId="false">
+ <h:form>
 
-    <p:dataTable id="dataTable" var="car" value=""
-                 paginator="true" rows="10"
-                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                 rowsPerPageTemplate="5,10,15">
-        <f:facet name="header">
-            Ajax Pagination
+     <p:dataTable id="dataTable" var="car" value="#{jaxrsproductsserviceBean.carsSmall}" widgetVar="carsTable" 
+            emptyMessage="No cars found with given criteria" filteredValue="#{jaxrsproductsserviceBean.filteredCars}">
+
+         <f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Search all fields:" />
+                <p:inputText id="globalFilter" onkeyup="carsTable.filter()" style="width:150px" />
+            </p:outputPanel>
         </f:facet>
 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="REFERENCE" />
-            </f:facet>
-            <h:outputText value="#{productsBean.reference}" />
+        <p:column id="modelColumn" filterBy="model" 
+                headerText="REFERENCE" footerText="contains"
+                filterMatchMode="contains">
+            <h:outputText value="#{car.REFERENCE}" />
         </p:column>
 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="DESIGNAION" />
-            </f:facet>
-            <h:outputText value="#{productsBean.designation}" />
+        <p:column id="manufacturerColumn" filterBy="manufacturer" 
+                headerText="DESIGNATION" footerText="exact"
+                filterOptions="#{jaxrsproductsserviceBean.manufacturerOptions}"
+                filterMatchMode="exact">
+            <h:outputText value="#{car.DESIGNATION}" />
+        </p:column>
+         
+         <p:column id="yearColumn" filterBy="year"
+                headerText="QUANTITE" footerText="startsWith">
+             <h:outputText value="#{car.quantite}" />
         </p:column>
 
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="QUANTITE" />
-            </f:facet>
-            <h:outputText value="#{productsBean.quantite}" />
-        </p:column>
-
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="DEPOT" />
-            </f:facet>
-            <h:outputText value="#{productsBean.depot}" />
+        <p:column id="colorColumn" filterBy="color"
+                headerText="DEPOT" footerText="endsWith" filterMatchMode="endsWith">
+            <h:outputText value="#{car.depot}" />
         </p:column>
     </p:dataTable>
-
+    
 </h:form>
-                    
-
 </h:body>
 </html>

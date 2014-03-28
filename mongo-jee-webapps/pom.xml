@@ -85,5 +85,11 @@
    <version>2.1</version>
    <type>jar</type>
   </dependency>
+  <dependency>
+   <groupId>org.dtelaroli.vplus</groupId>
+   <artifactId>vplus</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <type>jar</type>
+  </dependency>
  </dependencies>
 </project>
